@@ -1,0 +1,109 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>首页 · 123</title>
+  
+  
+  <style>
+    :root {
+      --ps-accent: #4a5d82;
+      --ps-content-w: 600px;
+    }
+  </style>
+  <link rel="stylesheet" href="assets/style.css">
+</head>
+  <body class="blog font-system ps-anim-rise">
+  <header class="blog-topbar">
+    <a class="blog-brand" href="index.html">
+      
+      <span class="blog-brand-text">
+        <span class="blog-site-name">123</span>
+        
+      </span>
+    </a>
+      <nav class="blog-nav" aria-label="站点导航">
+        <a href="%E5%BD%92%E6%A1%A3/index.html">归档</a><a href="254.html">254</a><a href="444.html">444</a><a href="%E5%85%B3%E4%BA%8E.html">关于</a>
+      </nav>
+  </header>
+  <main class="blog-main">
+    <section class="blog-home">
+      <div class="blog-home-body"><h1 id="123">123</h1>
+    <p>从这里开始写作。</p>
+    <ul>
+    <li>左侧文件树管理文档</li>
+    <li>编辑与实时预览左右对照</li>
+    <li>构建后可发布到 GitHub Pages</li>
+    </ul>
+    </div>
+        <div class="blog-stream">
+            <article class="blog-entry">
+              
+              <h2 class="blog-entry-title"><a href="%E5%BD%92%E6%A1%A3/123.html">123</a></h2>
+              
+            </article>
+            <article class="blog-entry">
+              
+              <h2 class="blog-entry-title"><a href="254.html">254</a></h2>
+              <p class="blog-entry-desc">5524</p>
+            </article>
+            <article class="blog-entry">
+              
+              <h2 class="blog-entry-title"><a href="444.html">444</a></h2>
+              <p class="blog-entry-desc">11</p>
+            </article>
+        </div>
+        <nav class="blog-pagination" aria-label="分页">
+            <span class="blog-page-step is-disabled">← 上一页</span>
+          <span class="blog-page-nums">
+                <span class="blog-page-num is-current" aria-current="page">1</span>
+                <a class="blog-page-num" href="page/2/index.html">2</a>
+          </span>
+            <a class="blog-page-step" href="page/2/index.html">下一页 →</a>
+        </nav>
+    </section>
+      <footer class="blog-footer">
+        <a href="https://github.com/MogroWang/Plainstruct" target="_blank" rel="noopener">由 Plainstruct 创建</a>
+      </footer>
+  </main>
+  <script>
+    (function () {
+      /* 文章页 TOC:滚动时点亮当前章节(最后一个滚过上沿 30% 处的标题) */
+      var toc = document.querySelector(".blog-toc");
+      if (!toc) return;
+      var byId = {};
+      Array.prototype.forEach.call(toc.querySelectorAll("a[href^='#']"), function (a) {
+        try {
+          byId[decodeURIComponent(a.getAttribute("href").slice(1))] = a;
+        } catch (err) {}
+      });
+      var headings = Array.prototype.slice.call(
+        document.querySelectorAll(".blog-post-body h2[id], .blog-post-body h3[id]")
+      ).filter(function (h) { return byId[h.id]; });
+      if (!headings.length) return;
+      var ticking = false;
+      function update() {
+        ticking = false;
+        var line = window.innerHeight * 0.3;
+        var activeId = "";
+        for (var i = 0; i < headings.length; i++) {
+          if (headings[i].getBoundingClientRect().top <= line) activeId = headings[i].id;
+          else break;
+        }
+        Array.prototype.forEach.call(toc.querySelectorAll("a.current"), function (a) {
+          a.classList.remove("current");
+        });
+        if (activeId && byId[activeId]) byId[activeId].classList.add("current");
+      }
+      window.addEventListener("scroll", function () {
+        if (!ticking) {
+          ticking = true;
+          requestAnimationFrame(update);
+        }
+      }, { passive: true });
+      update();
+    })();
+  </script>
+</body>
+</html>

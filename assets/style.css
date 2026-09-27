@@ -58,7 +58,7 @@ body.font-custom {
   display: flex;
   align-items: center;
   gap: 24px;
-  max-width: calc(var(--ps-content-w) + 236px);
+  max-width: var(--ps-topbar-w, 916px);
   margin: 0 auto;
   padding: 0 24px;
   height: var(--ps-topbar-h);
@@ -178,10 +178,11 @@ body.font-custom {
 }
 
 .blog-stream {
-  display: flex;
-  flex-direction: column;
+  display: grid;
+  grid-template-columns: repeat(var(--ps-nav-columns, 1), 1fr);
   gap: 14px;
   margin-top: 34px;
+  align-items: start;
 }
 
 .blog-entry {
@@ -806,4 +807,18 @@ a.blog-page-step:active {
   .blog-post-title {
     font-size: 23px;
   }
+}
+
+/* 文章流封面图:出血至卡片边缘,上圆角与卡片一致 */
+.blog-entry-cover {
+  display: block;
+  margin: -18px -22px 16px;
+  border-radius: 11px 11px 0 0;
+  overflow: hidden;
+}
+.blog-entry-cover img {
+  display: block;
+  width: 100%;
+  height: var(--ps-cover-h, 220px);
+  object-fit: cover;
 }

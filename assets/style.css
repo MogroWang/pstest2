@@ -1,4 +1,4 @@
-/* 手记 -- 博客深色:暖炭夜纸,文章为流,日期为记。层级靠字重与留白,一个强调色点到即止。 */
+/* 手记 -- 博客浅色:纸面素栏,文章为流,日期为记。层级靠字重与留白,一个强调色点到即止。 */
 
 * {
   box-sizing: border-box;
@@ -9,14 +9,14 @@ html {
 }
 
 :root {
-  --ps-bg: #16181d;
-  --ps-surface: #1c1f26;
-  --ps-ink: #d6d3cc;
-  --ps-ink-2: #9a968c;
-  --ps-ink-3: #6f6b62;
-  --ps-line: #2a2e36;
-  --ps-code-bg: #20242c;
-  --ps-on-accent: #16181d;
+  --ps-bg: #faf9f7;
+  --ps-surface: #ffffff;
+  --ps-ink: #26231e;
+  --ps-ink-2: #6b665c;
+  --ps-ink-3: #a39d90;
+  --ps-line: #e7e3da;
+  --ps-code-bg: #f1efe9;
+  --ps-on-accent: #ffffff;
   --ps-topbar-h: 64px;
   --ps-font-serif: Georgia, "Times New Roman", "Songti SC", "Noto Serif CJK SC", "SimSun", serif;
   --ps-font-mono: ui-monospace, SFMono-Regular, Menlo, Consolas, "Liberation Mono", monospace;
@@ -549,42 +549,42 @@ a.blog-page-step:active {
 
 .hljs-comment,
 .hljs-quote {
-  color: #8b949e;
+  color: #6e7781;
   font-style: italic;
 }
 
 .hljs-keyword,
 .hljs-selector-tag,
 .hljs-literal {
-  color: #ff7b72;
+  color: #cf222e;
 }
 
 .hljs-string,
 .hljs-attr,
 .hljs-addition {
-  color: #a5d6ff;
+  color: #0a3069;
 }
 
 .hljs-number,
 .hljs-symbol,
 .hljs-bullet {
-  color: #79c0ff;
+  color: #0550ae;
 }
 
 .hljs-title,
 .hljs-section,
 .hljs-name {
-  color: #d2a8ff;
+  color: #953800;
 }
 
 .hljs-built_in,
 .hljs-type {
-  color: #ffa657;
+  color: #8250df;
 }
 
 .hljs-meta,
 .hljs-deletion {
-  color: #ffa198;
+  color: #82071e;
 }
 
 /* ---------- 翻页 ---------- */

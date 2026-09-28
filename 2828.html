@@ -8,26 +8,28 @@
   <link rel="icon" href="assets/logo.png">
   <style>
     :root {
-      --ps-accent: #4a5d82;
-      --ps-content-w: 800px;
+      --ps-accent: #ff6666;
+      --ps-content-w: 680px;
       --ps-nav-columns: 2;
       --ps-cover-h: 220px;
-      --ps-topbar-w: 1600px;
+      --ps-topbar-w: 1020px;
+      --ps-logo-w: 100;
+      --ps-logo-h: 110;
+      --ps-logo-r: 0px;
     }
   </style>
   <link rel="stylesheet" href="assets/style.css">
+  <script>document.documentElement.classList.add("ps-js");</script>
 </head>
-  <body class="blog font-system ps-anim-spring">
+  <body class="blog font-system ps-anim-spring" data-hv-logo="淡化" data-hv-title="强调色" data-hv-nav="底色" data-shadow="轻" data-shadow-hv="深" data-loading="进度条">
+  <div class="ps-loader" aria-hidden="true"><span class="ps-loader-spin"></span></div>
   <header class="blog-topbar">
     <a class="blog-brand" href="index.html">
       <img class="blog-logo" src="assets/logo.png" alt="MWS">
-      <span class="blog-brand-text">
-        <span class="blog-site-name">MWS</span>
-        
-      </span>
+      
     </a>
       <nav class="blog-nav" aria-label="站点导航">
-        <a href="%E5%BD%92%E6%A1%A3/index.html">归档</a><a href="254.html">254</a><a href="%E5%A4%A7%E6%B4%8B.html">444</a><a href="%E5%85%B3%E4%BA%8E.html">关于</a><a href="2828.html" class="current">2828</a><a href="522525.html">522525</a>
+        <a href="%E5%BD%92%E6%A1%A3/index.html">归档</a><a href="%E5%85%B3%E4%BA%8E.html">关于</a>
       </nav>
   </header>
   <main class="blog-main">
@@ -86,6 +88,18 @@
         }
       }, { passive: true });
       update();
+    })();
+  </script>
+  <script>
+    (function () {
+      var loader = document.querySelector(".ps-loader");
+      if (!loader) return;
+      var done = function () {
+        loader.classList.add("is-done");
+        window.setTimeout(function () { loader.remove(); }, 420);
+      };
+      if (document.readyState === "complete") done();
+      else window.addEventListener("load", done);
     })();
   </script>
 </body>

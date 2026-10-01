@@ -9,20 +9,27 @@
   <style>
     :root {
       --ps-accent: #4a5d82;
-      --ps-content-w: 680px;
-      --ps-nav-columns: 1;
+      --ps-content-w: 860px;
+      --ps-nav-columns: 3;
       --ps-cover-h: 220px;
-      --ps-topbar-w: 920px;
+      --ps-cover-w: 100;
+      --ps-topbar-w: 1600px;
+      --ps-topbar-deform-w: 380px;
+      --ps-topbar-dur: 800ms;
+      --ps-topbar-ease-custom: 0.23, 1, 0.32, 1;
+      --ps-topbar-fill: color-mix(in srgb, #ffffff 78%, transparent);
+      --ps-topbar-blur: 6px;
+      --ps-home-w: 1100px;
       --ps-logo-w: 100;
-      --ps-logo-h: 100;
+      --ps-logo-h: 110;
       --ps-logo-r: 6px;
     }
   </style>
   <link rel="stylesheet" href="assets/style.css">
   <script>document.documentElement.classList.add("ps-js");</script>
 </head>
-  <body class="blog font-system ps-anim-rise"style="--ps-card-dur: 240ms;" data-hv-logo="无" data-hv-title="无" data-hv-nav="加深" data-shadow="无" data-shadow-hv="轻" data-hv-card="无" data-hv-ease="标准" data-loading="关闭">
-  
+  <body data-topbar-shape="药丸" data-topbar-ease="缓出" data-topbar-scroll-at="100" class="blog font-system ps-anim-rise"style="--ps-card-dur: 240ms;" data-hv-logo="无" data-hv-title="无" data-hv-nav="加深" data-shadow="轻" data-shadow-hv="深" data-hv-card="上浮" data-hv-ease="弹性" data-loading="进度条" data-cover-w="100" data-toc-style="缩进线" data-toc-hover="无">
+  <div class="ps-loader" aria-hidden="true"><span class="ps-loader-spin"></span></div>
   <header class="blog-topbar">
     <a class="blog-brand" href="index.html">
       <img class="blog-logo" src="assets/logo.png" alt="MWS">
@@ -32,7 +39,7 @@
       </span>
     </a>
       <nav class="blog-nav" aria-label="站点导航">
-        <a href="%E5%BD%92%E6%A1%A3/index.html">归档</a><a href="254.html">254</a><a href="%E5%A4%A7%E6%B4%8B.html">444</a><a href="%E5%85%B3%E4%BA%8E.html">关于</a><a href="2828.html">2828</a><a href="522525.html">522525</a>
+        <a href="%E5%BD%92%E6%A1%A3/index.html">归档</a><a href="%E5%85%B3%E4%BA%8E.html">关于</a>
       </nav>
   </header>
   <main class="blog-main">
@@ -70,6 +77,24 @@
         document.querySelectorAll(".blog-post-body h2[id], .blog-post-body h3[id]")
       ).filter(function (h) { return byId[h.id]; });
       if (!headings.length) return;
+      /* 目录点按:自行滚动到标题,并为吸顶顶栏留出间距
+         (原生 # 锚点跳转在预览等环境不生效,且标题会被顶栏遮住) */
+      toc.addEventListener("click", function (e) {
+        var a = e.target && e.target.closest ? e.target.closest("a[href^='#']") : null;
+        if (!a) return;
+        var hash = a.getAttribute("href");
+        var id = hash.slice(1);
+        try { id = decodeURIComponent(id); } catch (err) {}
+        var target = document.getElementById(id);
+        if (!target) return;
+        e.preventDefault();
+        var bar = document.querySelector(".blog-topbar");
+        var gap = (bar ? bar.getBoundingClientRect().height : 0) + 24;
+        var reduce = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+        var top = target.getBoundingClientRect().top + (window.pageYOffset || 0) - gap;
+        window.scrollTo({ top: top < 0 ? 0 : top, behavior: reduce ? "auto" : "smooth" });
+        if (window.history && history.replaceState) history.replaceState(null, "", hash);
+      });
       var ticking = false;
       function update() {
         ticking = false;
@@ -103,6 +128,19 @@
       };
       if (document.readyState === "complete") done();
       else window.addEventListener("load", done);
+    })();
+  </script>
+  <script>
+    (function () {
+      var tb = document.querySelector(".blog-topbar");
+      if (!tb) return;
+      var sync = function () {
+        var at = parseInt(document.body.getAttribute("data-topbar-scroll-at") || "24", 10);
+        if (!isFinite(at) || at < 0) at = 24;
+        tb.classList.toggle("is-scrolled", (window.scrollY || document.documentElement.scrollTop || 0) > at);
+      };
+      window.addEventListener("scroll", sync, { passive: true });
+      sync();
     })();
   </script>
 </body>
